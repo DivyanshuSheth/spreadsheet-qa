@@ -31,7 +31,7 @@ https://github.com/BraveGroup/SheetCopilot -- can be called upon (similar to fun
 
 ## Ideas
 1. Zoom into stuff in spreadsheet image (like a pie chart image, for example), and then answer questions based on that (based on the paper https://arxiv.org/pdf/2404.09797)
-2. Something like ViperGPT (https://viper.cs.columbia.edu/) for code generation and execution -- similar to planner from paper #3 above
+2. Something like ViperGPT (https://viper.cs.columbia.edu/) for code generation and execution -- similar to planner from paper #3 above (https://arxiv.org/pdf/2403.03636) -- need a sandboxed code execution environment for this
 3. Options to provide when prompting LLM: 1 - answer present, confident. 2 - incomplete context. 3 - irrelevant context.
     - to combine: 
 4. Long-term goal: use image-of-thought rationales from Table-Llava but use reinforcement learning for the rationales (from AI feedback, like what they did for the o1 model)
@@ -42,3 +42,15 @@ https://github.com/BraveGroup/SheetCopilot -- can be called upon (similar to fun
 2. Use prompting techniques from paper #2
 3. Use agents to plan, inform, and retrieve (if possible). Or maybe a code generation engine only, called when needed
 4. Use image-of-thought prompting
+
+## Why GPT-4o?
+Best performing LLM on both textual and visual tasks, on the LMSYS leaderboard: https://lmarena.ai/?leaderboard
+
+## Why ExpertPrompting?
+ExpertPrompting performs better than vanilla and CoT prompting with GPT-4: https://arxiv.org/pdf/2402.12424
+Experiment: Compare vanilla/CoT/ExpertPrompting
+
+## Limitation: Large tables won't have their entire table screenshot captured
+Use SheetAgent: https://arxiv.org/pdf/2403.03636, once its code comes out -- has an "Informer" module, that executes SQL commands on extracted tables from sheets
+
+## Limitation: Image inputs available to GPT-4o
