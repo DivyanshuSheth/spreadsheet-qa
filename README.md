@@ -95,6 +95,8 @@ Clone the repository. Create a conda virtual environment using Python 3.10. Inst
 
 Install the requirements using `pip install -r requirements.txt`. 
 
+Export OpenAI API key: `export OPENAI_API_KEY=<your_openai_api_key>`
+
 Modify the `src/run.sh` file to include the path to the Excel file, the output directory for the images, and the question to be asked.
 
 Run the script using `bash src/run.sh`.
