@@ -129,11 +129,17 @@ def main():
 
     args = parser.parse_args()
 
+    print(f"Image Directory: {args.image_dir}")
+    print(f"Question: {args.question}")
+
     # Get sorted list of image paths
     image_paths = sorted([os.path.join(args.image_dir, f) for f in os.listdir(args.image_dir) if f.lower().endswith(('.png', '.jpg', '.jpeg'))])
 
     partial_images = []
     
+    relevant_info_found = False
+    incomplete_info_found = False
+
     for image_path in image_paths:
         print(f'\nProcessing image: {image_path}')
         
@@ -156,31 +162,41 @@ def main():
         print(f"Category: {category}")
         print(f"Explanation: {explanation}")
         
-        if category.lstrip().rstrip() == 'Complete Information':
+        if category.lower().lstrip().rstrip() == 'relevant info':
             print("Complete answer found. Skipping further processing.")
+            relevant_info_found = True
             break
         
-        if category.lstrip().rstrip() == 'Partial Information':
+        if category.lower().lstrip().rstrip() == 'incomplete info':
             print("Partial answer found. Concatenating images for further analysis.")
             partial_images.append(image_path)
+            incomplete_info_found = True
             
             if len(partial_images) == 3:
-                concatenated_image_path = concatenate_images_vertically(partial_images)
-                
-                # Load and encode the concatenated image as base64
-                concat_img_b64_str, concat_img_type = load_image_as_base64(concatenated_image_path)
-                
-                if concat_img_b64_str:
-                    response_content = get_answer_from_gpt4o_with_image_b64(concat_img_b64_str, concat_img_type, args.question)
-                    answer = response_content.get("answer", "")
-                    category = response_content.get("category", "")
-                    explanation = response_content.get("explanation", "")
-                    
-                    print(f"Concatenated Answer: {answer}")
-                    print(f"Concatenated Category: {category}")
-                    print(f"Concatenated Explanation: {explanation}")
-                
                 break
+    
+    
+    if not relevant_info_found and not incomplete_info_found:
+        print("No relevant information found in the images.")
+        return
+    
+    if len(partial_images) > 0:
+        concatenated_image_path = concatenate_images_vertically(partial_images)
+        
+        # Load and encode the concatenated image as base64
+        concat_img_b64_str, concat_img_type = load_image_as_base64(concatenated_image_path)
+        
+        if concat_img_b64_str:
+            response_content = get_answer_from_gpt4o_with_image_b64(concat_img_b64_str, concat_img_type, args.question)
+            answer = response_content.get("answer", "")
+            category = response_content.get("category", "")
+            explanation = response_content.get("explanation", "")
+            
+            print(f"Concatenated Answer: {answer}")
+            print(f"Concatenated Category: {category}")
+            print(f"Concatenated Explanation: {explanation}")
+        return
+
 
 # Entry point for the script
 if __name__ == "__main__":
