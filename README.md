@@ -25,7 +25,6 @@ https://www.connectedpapers.com/main/dea212a431e6cae3a3e66657d6cbbd3b7c55925f/Mu
     - CoT prompting helps
     - Row-coloring tables helps for some models, doesn't for others
     - Highlighting relevant cells helps
-3. 
 
 ## Sheet Copilot
 https://github.com/BraveGroup/SheetCopilot -- can be called upon (similar to function calling) in the process of producing an answer to a query, for a subtask
