@@ -12,7 +12,7 @@ Instructions:
 3. Answer Formulation: Provide a clear and concise answer to the question based on your analysis of the spreadsheet and categorize your result into one of the following:
     - **No Info**: Confirmation that the image is irrelevant to the specified question.
     - **Incomplete Info**: Indications of partial information present in the image, necessitating further details (a screenshot of a different part of the spreadsheet) to provide a comprehensive answer.
-    - **Relevant Info**: A definitive answer that can be confidently derived from the information in the image.
+    - **Relevant Info**: A definitive answer that can be confidently derived from the information in the image. Only select this category if the exact terms specified in the question are visible in the image.
     
 4. Explanation: Include a brief explanation of how you arrived at your answer, highlighting key elements from the spreadsheet that informed your decision.
 
