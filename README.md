@@ -126,7 +126,7 @@ Complete answer found. Skipping further processing.
 ```
 
 page_0.png:
-![page_0.png](data/pngs/page_0.png)
+![page_0.png](./data/pngs/page_0.png)
 
 
 2. Incorrect Answer -- Made assumptions based on incomplete information
@@ -172,5 +172,5 @@ Complete answer found. Skipping further processing.
 ```
 
 page_3.png:
-![page_3.png](data/pngs/page_3.png)
+![page_3.png](./data/pngs/page_3.png)
 
