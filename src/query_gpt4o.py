@@ -34,7 +34,7 @@ def load_image_as_base64(image_path):
         print(f"Error loading and encoding image: {e}")
         return None, None
     
-def concatenate_images_vertically(images):
+def concatenate_images_vertically(images, output_dir):
     """
     Concatenates a list of images vertically.
 
@@ -53,7 +53,7 @@ def concatenate_images_vertically(images):
         new_image.paste(img, (0, y_offset))
         y_offset += img.height
     
-    concatenated_path = 'concatenated_image.png'
+    concatenated_path = os.path.join(output_dir, 'concatenated_image.png')
     new_image.save(concatenated_path)
     
     return concatenated_path
@@ -87,7 +87,8 @@ def get_answer_from_gpt4o_with_image_b64(img_b64_str, img_type, question):
                     },
                 ],
             }
-        ]
+        ],
+        temperature=0.2  # Set temperature to 0.2
     )
     
     # Convert JSON string to dictionary
@@ -107,20 +108,6 @@ def get_answer_from_gpt4o_with_image_b64(img_b64_str, img_type, question):
     
     return response_content
 
-
-# print(f"Question: {args.question}")
-# # print(f"Answer: {answer}")
-# # print(f"Category: {category}")
-# try:
-#     response_category = response_content.get("category", "")
-#     response_answer = response_content.get("answer", "")
-#     response_explanation = response_content.get("explanation", "")
-#     print(f"Category: {response_category}")
-#     print(f"Answer: {response_answer}")
-#     print(f"Explanation: {response_explanation}")
-# except:
-#     # Print the response content
-#     print(f"Response: {response_content}")
 
 def main():
     parser = argparse.ArgumentParser(description='Question answering over images using GPT-4o.')
@@ -165,7 +152,7 @@ def main():
         if category.lower().lstrip().rstrip() == 'relevant info':
             print("Complete answer found. Skipping further processing.")
             relevant_info_found = True
-            break
+            return
         
         if category.lower().lstrip().rstrip() == 'incomplete info':
             print("Partial answer found. Concatenating images for further analysis.")
@@ -180,8 +167,9 @@ def main():
         print("No relevant information found in the images.")
         return
     
-    if len(partial_images) > 0:
-        concatenated_image_path = concatenate_images_vertically(partial_images)
+    if not relevant_info_found and len(partial_images) > 0:
+        concatenated_image_path = concatenate_images_vertically(partial_images, args.image_dir)
+        print("Concatenated image created. Path: ", concatenated_image_path)
         
         # Load and encode the concatenated image as base64
         concat_img_b64_str, concat_img_type = load_image_as_base64(concatenated_image_path)
@@ -196,7 +184,8 @@ def main():
             print(f"Concatenated Category: {category}")
             print(f"Concatenated Explanation: {explanation}")
         return
-
+    
+    print("No relevant information found in the images.")
 
 # Entry point for the script
 if __name__ == "__main__":

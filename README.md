@@ -98,11 +98,39 @@ Modify the `src/run.sh` file to include the path to the Excel file, the output d
 Run the script using `bash src/run.sh`.
 
 
-## Example Run
+## Example Runs
+
+1. Correct Answer, based on the first image
+
 Inputs in `src/run.sh`:
 ```bash 
 EXCEL_PATH="/home/dasheth/ema/spreadsheet-qa/data/xlsx/Capitalization Table - Series A Example.xlsx"
-IMAGE_DIR="/home/dasheth/ema/spreadsheet-qa/data/trial-run-pngs"
+IMAGE_DIR="/home/dasheth/ema/spreadsheet-qa/data/pngs"
+QUESTION="What is the number of common shares acquired by investor 1?"
+```
+
+```text
+Input Excel: /home/dasheth/ema/spreadsheet-qa/data/xlsx/Capitalization Table - Series A Example.xlsx
+Output Directory: /home/dasheth/ema/spreadsheet-qa/data/pngs
+/home/dasheth/miniconda3/envs/ema/lib/python3.10/site-packages/openpyxl/worksheet/_reader.py:329: UserWarning: Unknown extension is not supported and will be removed
+  warn(msg)
+Conversion complete. Images are saved in /home/dasheth/ema/spreadsheet-qa/data/pngs
+Image Directory: /home/dasheth/ema/spreadsheet-qa/data/pngs
+Question: What is the number of common shares acquired by investor 1?
+
+Processing image: /home/dasheth/ema/spreadsheet-qa/data/pngs/page_0.png
+Answer: 200,000
+Category: Relevant Info
+Explanation: The number of common shares acquired by Investor One is listed in the 'Shares Acquired by Investors' section of the spreadsheet. Under the 'Common' column, it shows that Investor One acquired 200,000 common shares.
+Complete answer found. Skipping further processing.
+```
+
+2. Incorrect Answer -- Made assumptions based on incomplete information
+
+Inputs in `src/run.sh`:
+```bash 
+EXCEL_PATH="/home/dasheth/ema/spreadsheet-qa/data/xlsx/Capitalization Table - Series A Example.xlsx"
+IMAGE_DIR="/home/dasheth/ema/spreadsheet-qa/data/pngs"
 QUESTION="What is the sum of the Series A and Series B funding? Get both amounts separately individually and sum them."
 ```
 
@@ -117,24 +145,26 @@ Image Directory: /home/dasheth/ema/spreadsheet-qa/data/pngs
 Question: What is the sum of the Series A and Series B funding? Get both amounts separately individually and sum them.
 
 Processing image: /home/dasheth/ema/spreadsheet-qa/data/pngs/page_0.png
-Answer: The spreadsheet only provides data related to Series A funding and does not contain any information on Series B funding.
+Answer: The image provided does not contain information about Series B funding.
 Category: No Info
-Explanation: The image is labeled 'Capitalization Table - Series A Only', and contains data related to only Series A funding across different shareholders and options. However, no entry or section corresponding to Series B funding is present in the provided spreadsheet.
+Explanation: The spreadsheet image only includes details about Series A funding, with no mention or data related to Series B funding.
 
 Processing image: /home/dasheth/ema/spreadsheet-qa/data/pngs/page_1.png
-Answer: The image does not contain information about Series A and Series B funding amounts, so the sum cannot be calculated.
-Category: Incomplete Info
-Explanation: The provided spreadsheet image primarily includes information related to ownership percentages and shares (Fully Diluted Shares, Option Pool Shares, and Outstanding Shares). There are no details about Series A or Series B funding in the visible portion of the spreadsheet.
-Partial answer found. Concatenating images for further analysis.
+Answer: The image does not contain information about Series A and Series B funding amounts.
+Category: No Info
+Explanation: The spreadsheet image provided contains details about percent ownership, fully diluted shares, option pool shares, and outstanding shares, but it does not include any information about Series A and Series B funding amounts.
 
 Processing image: /home/dasheth/ema/spreadsheet-qa/data/pngs/page_2.png
-Answer: $1,000,000 for Series A
+Answer: The spreadsheet does not provide explicit information about the Series B funding amount. Only the Series A funding amount is visible.
+Category: Incomplete Info
+Explanation: The Series A funding amount is $1,250,000 as shown in the 'Liquidation Preference Calculation' section. However, there is no information provided about Series B funding in the visible part of the spreadsheet.
+Partial answer found. Concatenating images for further analysis.
+
+Processing image: /home/dasheth/ema/spreadsheet-qa/data/pngs/page_3.png
+Answer: The sum of the Series A and Series B funding is $6,175,000. Series A funding is $2,000,000 and Series B funding is $4,175,000.
 Category: Relevant Info
-Explanation: The value for Series A Preferred Shares in the Summary Cap Table section of the spreadsheet shows 1,000,000. However, there is no information provided on Series B funding, which implies no such information exists in the image.
+Explanation: The Series A funding amount is listed as $2,000,000 and the Series B funding amount is listed as $4,175,000 in the 'Total Proceeds' row of the spreadsheet. Summing these amounts gives a total of $6,175,000.
 Complete answer found. Skipping further processing.
-Concatenated Answer: The image does not provide information on the Series A and Series B funding amounts.
-Concatenated Category: No Info
-Concatenated Explanation: The displayed spreadsheet is focused on percent ownership, fully diluted shares, option pool shares, and outstanding shares. There is no information about Series A or Series B funding amounts in the image.
 ```
 
 

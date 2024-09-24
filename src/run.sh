@@ -2,8 +2,9 @@
 
 EXCEL_PATH="/home/dasheth/ema/spreadsheet-qa/data/xlsx/Capitalization Table - Series A Example.xlsx"
 IMAGE_DIR="/home/dasheth/ema/spreadsheet-qa/data/pngs"
-
-QUESTION="What is the sum of the Series A and Series B funding? Get both amounts separately individually and sum them."
+QUESTION="What is the number of common shares acquired by investor 1?"
+# QUESTION="What is the number of outstanding common shares in the sheet titled 'Waterfall Analysis'? Do not look at sheets that are not titled 'Waterfall Analysis'."
+# QUESTION="What is the sum of the Series A and Series B funding? Get both amounts separately individually and sum them."
 # QUESTION="What is the outstanding Series A liquidation preference amount?"
 # QUESTION="What is the sum of the pre-money valuation and post-money valuation?"
 # QUESTION="What is the percentage of fully diluted shares for advisors?"
