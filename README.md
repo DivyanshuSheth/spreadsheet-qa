@@ -86,6 +86,9 @@ Use SheetAgent: (SQA #3), once its code comes out -- has an "Informer" module, t
 ## Limitation: Conversion pipeline errors
 Errors in the .xlsx -> .png conversion pipeline can lead to incorrect answers. Need to ensure the pipeline is robust. The aspose library has a paid version with more features and with watermarking removed. Use the free version for now
 
+## Limitation:
+GPT-4o hallucinates information at times. Says it has found information ("Relevant Info" category) with a hallucinated answer. Picks "Relevant Info" sometimes even when incomplete information is found, saying the rest isn't available. Prompt engineering can help with this
+
 
 # Usage
 Clone the repository. Install the requirements using `pip install -r requirements.txt`. 
