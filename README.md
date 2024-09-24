@@ -53,6 +53,7 @@ Assumed input format: .xlsx (Excel files)
     - No Info: No information present in the image. 
     - Incomplete Info: Information present, but incomplete. 
     - Relevant Info: Information present, and relevant to the question asked
+    
    If the category is "Relevant Info", break the loop and return the corresponding answer. If the answer is "Incomplete Info", keep the loop going. Concatenate all images (upto 3) with "Incomplete Info" returned and ask the question again. If the answer is "No Info", keep the loop going until all images are exhausted. If the loop is exhausted, return "No Info" as the answer.
 
 ## Why image inputs?
