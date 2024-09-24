@@ -125,6 +125,10 @@ Explanation: The number of common shares acquired by Investor One is listed in t
 Complete answer found. Skipping further processing.
 ```
 
+page_0.png:
+![page_0.png](data/pngs/page_0.png)
+
+
 2. Incorrect Answer -- Made assumptions based on incomplete information
 
 Inputs in `src/run.sh`:
@@ -167,4 +171,6 @@ Explanation: The Series A funding amount is listed as $2,000,000 and the Series 
 Complete answer found. Skipping further processing.
 ```
 
+page_3.png:
+![page_3.png](data/pngs/page_3.png)
 
