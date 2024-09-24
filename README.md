@@ -91,7 +91,9 @@ GPT-4o hallucinates information at times. Says it has found information ("Releva
 
 
 # Usage
-Clone the repository. Install the requirements using `pip install -r requirements.txt`. 
+Clone the repository. Create a conda virtual environment using Python 3.10. Install openpyxl: `conda install openpyxl` and poppler: `conda install poppler`.
+
+Install the requirements using `pip install -r requirements.txt`. 
 
 Modify the `src/run.sh` file to include the path to the Excel file, the output directory for the images, and the question to be asked.
 
